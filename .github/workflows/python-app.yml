@@ -35,5 +35,5 @@ jobs:
       #     pytest
 
     - name: run stubber
-        run: |
-          python main.py
+      run: |
+        python main.py
