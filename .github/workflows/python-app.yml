@@ -58,8 +58,8 @@ jobs:
         labels: |
           report
           automated pr
-        # assignees: josverl
-        reviewers: josverl
+        assignees: josverl
+        # reviewers: josverl
         team-reviewers: |
           owners
           maintainers
