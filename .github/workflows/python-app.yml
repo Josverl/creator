@@ -37,4 +37,3 @@ jobs:
     - name: run stubber
         run: |
           python main.py
-
