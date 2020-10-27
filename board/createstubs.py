@@ -332,7 +332,7 @@ class Stubber():
             ))
         f_name = "{}/{}".format(self.path, filename)
         # can be used to detect collection path for stubs
-        print("Stub path: {}".format(self.path))
+        self._log.info("Stub path: {}".format(self.path))
         gc.collect()
         try:
             # write json by node to reduce memory requirements

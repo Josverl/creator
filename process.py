@@ -222,7 +222,7 @@ def minify_script(patches=None, keep_report=True, show_diff=False):
                              ' {:<55} mem:{:>5}".'
                              'format(module_name, file_name, m1))'))
         clean = ('rprint', 'self._log.info("Clean/remove files in folder: {}".format(path))')
-        report2 = ('rprint', 'print("Stub path: {}".format(self.path))')
+        report2 = ('rprint', 'self._log.info("Stub path: {}".format(self.path))')
         edits.insert(0, report1)
         edits.insert(1, clean)
         edits.insert(1, report2)
