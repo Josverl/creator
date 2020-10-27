@@ -4,16 +4,15 @@
 name: minify-RP
 
 on:
+  workflow_dispatch:
   push:
-    # branches: [ master ]
-  # pull_request:
-  #   branches: [ master ]
+    branches: [ master , dev ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
 
     steps:
     - uses: actions/checkout@v2
@@ -21,21 +20,13 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.8
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
-
-    # - name: Lint with flake8
-    #   run: |
-    #     # stop the build if there are Python syntax errors or undefined names
-    #     flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-
-      # - name: Test with pytest
-      #   run: |
-      #     pytest
 
     - name: run `process minify`
       run: |
@@ -46,27 +37,21 @@ jobs:
       id: cpr
       uses: peter-evans/create-pull-request@v3
       with:
-        token: ${{ secrets.PAT }}
-        commit-message: minified
-        committer: GitHub <noreply@github.com>
-        author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-        signoff: false
-        branch: minified
-        delete-branch: true
-        title: '[Example] Update report'
-        body: |
-          minified
-          - Updated with *today's* date
-
-
+        commit-message: add/update minified
         labels: |
-          report
           automated pr
-        assignees: josverl
-        team-reviewers: |
-          owners
-          maintainers
-        draft: false
+
+        # # token: ${{ secrets.PAT }}
+        # committer: GitHub <noreply@github.com>
+        # author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+        # signoff: false
+        # branch: minified
+        # delete-branch: true
+        # title: '[Example] Update report'
+        # body: |
+        #   minified
+        #   - Updated with *today's* date
+
 
     - name: Check outputs
       run: |
