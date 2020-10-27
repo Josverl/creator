@@ -8,7 +8,7 @@ import gc
 import uos as os
 from utime import sleep_us
 from ujson import dumps
-stubber_version='1.3.6'
+stubber_version='2.3.4.5'
 try:
  from machine import resetWDT 
 except ImportError:
