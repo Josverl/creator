@@ -6,7 +6,6 @@ name: minify-RP
 on:
   workflow_dispatch:
   push:
-    branches: [ master , dev ]
   pull_request:
     branches: [ master ]
 
@@ -53,11 +52,9 @@ jobs:
         commit-message: add/update minified
         labels: |
           automated pr
-        title: 'create minified version of createstubs.py'
+        title: '${{ steps.extract_branch.outputs.branch }} : update minified/createstubs.py'
         body: |
            - Updated with *today's* date        
-
-
 
     - name: Check outputs
       run: |
