@@ -11,7 +11,7 @@ import uos as os
 from utime import sleep_us
 from ujson import dumps
 
-stubber_version = '1.3.4.5'
+stubber_version = '2.3.4.5'
 # deal with firmware specific implementations.
 try:
     from machine import resetWDT #LoBo
@@ -87,7 +87,7 @@ class Stubber():
                         'uerrno', 'uhashlib', 'uheapq', 'uio', 'ujson', 'umqtt/robust', 'umqtt/simple', 'uos', 'upip', 'upip_utarfile', 'urandom',
                         'ure', 'urequests', 'urllib/urequest', 'uselect', 'usocket', 'ussl', 'ustruct', 'utime', 'utimeq', 'uwebsocket', 'uzlib',
                         'websocket', 'websocket_helper', 'writer', 'ymodem', 'zlib', 'pycom', 'crypto']
-        self.modules += ['pyb','stm']
+        self.modules += ['pyb','stm'] # pyboard
         self.modules += ['uasyncio/lock','uasyncio/stream','uasyncio/__init__', 'uasyncio/core', 'uasyncio/event','uasyncio/funcs'] #1.13
 
         #try to avoid running out of memory with nested mods
