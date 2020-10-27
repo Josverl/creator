@@ -11,7 +11,7 @@ import uos as os
 from utime import sleep_us
 from ujson import dumps
 
-stubber_version = '1.3.5'
+stubber_version = '1.3.6'
 # deal with firmware specific implementations.
 try:
     from machine import resetWDT #LoBo
@@ -326,12 +326,13 @@ class Stubber():
 
     def report(self, filename: str = "modules.json"):
         "create json with list of exported modules"
-        self._log.info("Created stubs for {} modules on board {}\nPath: {}".format(
+        self._log.info("Created stubs for {} modules on board {}".format(
             len(self._report),
-            self.firmware_ID(),
-            self.path
+            self.firmware_ID()
             ))
         f_name = "{}/{}".format(self.path, filename)
+        # can be used to detect collection path for stubs
+        print("StubPath: {}".format(self.path))
         gc.collect()
         try:
             # write json by node to reduce memory requirements
