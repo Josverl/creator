@@ -22,7 +22,6 @@ SCRIPT = ROOT / 'board' / 'createstubs.py'
 DEST = ROOT / 'minified' / 'createstubs.py'
 PATCHES = ROOT / 'patches'
 
-
 def apply_patch(s, patch, revert=False):
     """
     Apply patch to string s to recover newer string.
@@ -241,8 +240,9 @@ def minify_script(patches=None, keep_report=True, show_diff=False):
 
 def get_patches():
     """Iterate patch files"""
-    for f in PATCHES.iterdir():
-        yield (f.stem, f.resolve())
+    if PATCHES.exists():
+        for f in PATCHES.iterdir():
+            yield (f.stem, f.resolve())
 
 
 def resolve_patches(patch_names):
@@ -268,10 +268,14 @@ def cli_patch(**kwargs):
     out = kwargs.get("output")
     patch_names = kwargs.pop('patches')
     paths = resolve_patches(patch_names)
+    content = ''
     with SCRIPT.open('r') as f:
         source = f.read()
         for p in paths:
             content = apply_patch(source, p.read_text())
+    if not out.parent.exists():
+        #create folder as needed.
+        out.parent.mkdir()
     with out.open('w+') as o:
         o.write(content)
     print("\nDone!")
@@ -288,6 +292,9 @@ def cli_minify(**kwargs):
         print("Please install via:\n  pip install pyminifier")
         sys.exit(1)
     patch_paths = resolve_patches(patches)
+    if not out.parent.exists():
+        #create folder as needed.
+        out.parent.mkdir()
     with out.open('w+') as f:
         report = kwargs.pop('no_report')
         diff = kwargs.pop('diff')

@@ -4,7 +4,6 @@ Copyright (c) 2019-2020 Jos Verlinde
 """
 #pylint: disable= invalid-name, missing-function-docstring
 import sys
-export sys
 import errno
 import gc
 import logging
@@ -75,9 +74,8 @@ class Stubber():
             self.ensure_folder(path + "/")
         except OSError:
             self._log.error("error creating stub folder {}".format(path))
-        self.problematic = ["upysh", "webrepl_setup", "http_client", "http_client_ssl", "http_server", "http_server_ssl"]
-#        self.problematic += ["uasyncio/core","io","uio","uctypes" ] # "builtins"
-        self.excluded = ["webrepl", "_webrepl", "webrepl_setup"]
+        self.problematic = ["upysh", "webrepl", "_webrepl","webrepl_setup", "http_client", "http_client_ssl", "http_server", "http_server_ssl"]
+        self.excluded = ["port_diag","example_sub_led.py","example_pub_button.py"]
         # there is no option to discover modules from upython, need to hardcode
         # below contains combined modules from  Micropython ESP8622, ESP32, Loboris and pycom
         self.modules = ['_thread', 'ak8963', 'apa102', 'apa106', 'array', 'binascii', 'btree', 'bluetooth', 'builtins', 'cmath', 'collections',
