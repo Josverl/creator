@@ -32,22 +32,22 @@ jobs:
       run: |
         python process.py minify
 
-    ## Needs Secrets.PAT 
     - name: Create Pull Request
       id: cpr
       uses: peter-evans/create-pull-request@v3
+      # ref: https://github.com/peter-evans/create-pull-request
       with:
         commit-message: add/update minified
         labels: |
           automated pr
+        title: 'create minified version of createstubs.py'
+        branch: minify
 
         # # token: ${{ secrets.PAT }}
         # committer: GitHub <noreply@github.com>
         # author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
         # signoff: false
-        # branch: minified
         # delete-branch: true
-        # title: '[Example] Update report'
         # body: |
         #   minified
         #   - Updated with *today's* date
