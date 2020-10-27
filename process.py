@@ -218,12 +218,14 @@ def minify_script(patches=None, keep_report=True, show_diff=False):
         ("comment", "self._log.error"),
     ]
     if keep_report:
-        report = ('rprint', ('self._log.info("Stub module: {:<20} to file:'
+        report1 = ('rprint', ('self._log.info("Stub module: {:<20} to file:'
                              ' {:<55} mem:{:>5}".'
                              'format(module_name, file_name, m1))'))
         clean = ('rprint', 'self._log.info("Clean/remove files in folder: {}".format(path))')
-        edits.insert(0, report)
+        report2 = ('rprint', 'print("Stub path: {}".format(self.path))')
+        edits.insert(0, report1)
         edits.insert(1, clean)
+        edits.insert(1, report2)
 
     minopts = Values({'tabs': False})
     with SCRIPT.open('r') as f:
