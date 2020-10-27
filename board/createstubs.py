@@ -4,6 +4,7 @@ Copyright (c) 2019-2020 Jos Verlinde
 """
 #pylint: disable= invalid-name, missing-function-docstring
 import sys
+export sys
 import errno
 import gc
 import logging

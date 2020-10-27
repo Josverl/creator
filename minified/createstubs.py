@@ -3,6 +3,7 @@ Create stubs for (all) modules on a MicroPython board
 Copyright (c) 2019-2020 Jos Verlinde
 """
 import sys
+export sys
 import errno
 import gc
 import uos as os
