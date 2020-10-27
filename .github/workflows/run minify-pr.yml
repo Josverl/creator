@@ -32,6 +32,12 @@ jobs:
       run: |
         python process.py minify
 
+    - name: verify minified using pylint
+      run: |
+        pylint minified/createstubs.py -E -d E0401,E1101
+        # ignore Unable to import '<upythonmodule>' (import-error)
+        # ignore Module 'gc' has no 'mem_free' member (no-member)
+
     - name: Create Pull Request
       id: cpr
       uses: peter-evans/create-pull-request@v3
@@ -43,14 +49,6 @@ jobs:
         title: 'create minified version of createstubs.py'
         branch: minify
 
-        # # token: ${{ secrets.PAT }}
-        # committer: GitHub <noreply@github.com>
-        # author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-        # signoff: false
-        # delete-branch: true
-        # body: |
-        #   minified
-        #   - Updated with *today's* date
 
 
     - name: Check outputs
